@@ -1,0 +1,17 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`should do nothing if the emoji is accessible already 1`] = `
+"
+function Correct() {
+  return <span aria-label=\\"shouldn't change\\" role=\\"img\\">🐽</span>;
+}"
+`;
+
+exports[`should wrap an emoji that doesn't have any accessibility span 1`] = `
+"
+function Bad() {
+  return <div>
+          test <span aria-label=\\"pig nose\\" role=\\"img\\">🐽</span> blah
+        </div>;
+}"
+`;

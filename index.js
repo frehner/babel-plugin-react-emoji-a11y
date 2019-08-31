@@ -19,9 +19,12 @@ module.exports = function testPlugin({ types: t }) {
 
         const openingParentElement = path.parent.openingElement;
 
-        if (openingParentElement.name.name !== "span") {
+        // if it is wrapped but there's other text around it as well
+        const emojiIsAlone = path.node.value.trim() === emojiData.emoji;
+
+        if (openingParentElement.name.name !== "span" || !emojiIsAlone) {
           console.warn(
-            "You have an emoji that isn't accessible. We'll help you out by making it accessible, but you should really do that in your source code. :)"
+            "You may have an emoji that isn't accessible. We'll help out by making it accessible, but you should really do that in your source code. :)"
           );
 
           path.replaceWithMultiple([
@@ -42,18 +45,18 @@ module.exports = function testPlugin({ types: t }) {
           ]);
         } else {
           let hasCorrectRole = false;
-          let hasAriaLabel = false;
+          let hasCorrectAriaLabel = false;
+
           for (let i = 0; i < openingParentElement.attributes.length; i++) {
             const attribute = openingParentElement.attributes[i];
             switch (attribute.name.name) {
               case "aria-label":
-                if (attribute.value.value) hasAriaLabel = true;
+                // if they put something in there, then we'll assume it's good
+                if (attribute.value.value.trim()) hasCorrectAriaLabel = true;
                 break;
 
               case "role":
-                if (attribute.value.value === "img") {
-                  hasCorrectRole = true;
-                }
+                if (attribute.value.value === "img") hasCorrectRole = true;
 
               default:
                 break;
@@ -66,7 +69,7 @@ module.exports = function testPlugin({ types: t }) {
             );
           }
 
-          if (!hasAriaLabel) {
+          if (!hasCorrectAriaLabel) {
             console.warn(
               `You wrapped your emoji in a span, but didn't give it an aria-label="{label}".`
             );
