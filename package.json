@@ -1,0 +1,29 @@
+{
+  "name": "babel-react-emoji-a11y-plugin",
+  "version": "0.0.1",
+  "description": "A babel plugin that will take any emojis not wrapped in <span> and wrap them, with correct a11y attributes",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest",
+    "test:watch": "jest --watch"
+  },
+  "keywords": [
+    "emoji",
+    "span",
+    "wrapper",
+    "babel",
+    "plugin",
+    "babel-plugin"
+  ],
+  "author": "Anthony Frehner",
+  "license": "ISC",
+  "devDependencies": {
+    "babel-core": "^6.26.3",
+    "jest": "^24.9.0"
+  },
+  "dependencies": {
+    "babel-plugin-syntax-jsx": "^6.18.0",
+    "emoji-regex": "^8.0.0",
+    "gemoji": "^4.2.1"
+  }
+}
