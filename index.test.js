@@ -1,5 +1,5 @@
-const babel = require("babel-core")
-const plugin = require("./index")
+const babel = require("babel-core");
+const plugin = require("./index");
 
 fit(`should be able to find an emoji`, () => {
   const example = `
@@ -18,11 +18,11 @@ fit(`should be able to find an emoji`, () => {
         )
       }
     }
-  `
-  const {code} = babel.transform(example, {plugins: [plugin]})
-  console.log(code)
+  `;
+  const { code } = babel.transform(example, { plugins: [plugin] });
+  console.log(code);
   // expect(code).toMatchSnapshot()
-})
+});
 
 it(`should not warn if they did it correctly`, () => {
   const example = `
@@ -31,7 +31,7 @@ it(`should not warn if they did it correctly`, () => {
         <span aria-label="pig nose" role="img">🐽</span>
       )
     }
-  `
+  `;
 
-  const {code} = babel.transform(example, {plugins: [plugin]})
-})
+  const { code } = babel.transform(example, { plugins: [plugin] });
+});
