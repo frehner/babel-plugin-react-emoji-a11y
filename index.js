@@ -28,7 +28,7 @@ module.exports = function testPlugin({types: t}) {
               t.jSXOpeningElement(
                 t.jSXIdentifier("span"),
                 [
-                  t.jSXAttribute(t.jSXIdentifier("aria-description"), t.stringLiteral(emojiData.description)),
+                  t.jSXAttribute(t.jSXIdentifier("aria-label"), t.stringLiteral(emojiData.description)),
                   t.jSXAttribute(t.jSXIdentifier("role"), t.stringLiteral("img"))
                 ]
               ),
