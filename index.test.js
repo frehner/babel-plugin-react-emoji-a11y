@@ -38,7 +38,7 @@ it(`should add "role" to a span that doesn't have it`, () => {
   expect(console.warn).toBeCalledTimes(1);
 });
 
-fit(`should add "aria-label" to a span that doesn't have it`, () => {
+it(`should add "aria-label" to a span that doesn't have it`, () => {
   const original = `
     class AlmostThere extends React.component {
       render() {
@@ -64,6 +64,7 @@ it(`should fix emojis that are in accessible spans but with other text`, () => {
 
   const { code } = babel.transform(original, { plugins: [plugin] });
   expect(code).toMatchSnapshot();
+  expect(console.warn).toBeCalledTimes(1);
 });
 
 it(`should do nothing if the emoji is accessible already`, () => {
@@ -77,4 +78,5 @@ it(`should do nothing if the emoji is accessible already`, () => {
 
   const { code } = babel.transform(original, { plugins: [plugin] });
   expect(code).toMatchSnapshot();
+  expect(console.warn).toBeCalledTimes(0);
 });
