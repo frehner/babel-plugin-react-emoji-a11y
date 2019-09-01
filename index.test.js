@@ -1,5 +1,6 @@
 const babel = require("babel-core");
 const plugin = require("./index");
+
 jest.spyOn(console, "warn");
 
 beforeEach(() => {
@@ -33,12 +34,11 @@ it(`should add "role" to a span that doesn't have it`, () => {
     }
   `;
   const { code } = babel.transform(original, { plugins: [plugin] });
-  console.log(code);
-  // expect(code).toMatchSnapshot()
+  expect(code).toMatchSnapshot();
   expect(console.warn).toBeCalledTimes(1);
 });
 
-it(`should add "aria-label" to a span that doesn't have it`, () => {
+fit(`should add "aria-label" to a span that doesn't have it`, () => {
   const original = `
     class AlmostThere extends React.component {
       render() {
@@ -49,8 +49,7 @@ it(`should add "aria-label" to a span that doesn't have it`, () => {
     }
   `;
   const { code } = babel.transform(original, { plugins: [plugin] });
-  console.log(code);
-  // expect(code).toMatchSnapshot()
+  expect(code).toMatchSnapshot();
   expect(console.warn).toBeCalledTimes(1);
 });
 
@@ -64,7 +63,7 @@ it(`should fix emojis that are in accessible spans but with other text`, () => {
   `;
 
   const { code } = babel.transform(original, { plugins: [plugin] });
-  // expect(code).toMatchSnapshot()
+  expect(code).toMatchSnapshot();
 });
 
 it(`should do nothing if the emoji is accessible already`, () => {

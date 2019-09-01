@@ -1,9 +1,34 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`should add "aria-label" to a span that doesn't have it 1`] = `
+"
+class AlmostThere extends React.component {
+  render() {
+    return <span role=\\"img\\" aria-label=\\"pig nose\\">🐽</span>;
+  }
+}"
+`;
+
+exports[`should add "role" to a span that doesn't have it 1`] = `
+"
+class AlmostThere extends React.component {
+  render() {
+    return <span aria-label=\\"pig nose\\" role=\\"img\\">🐽</span>;
+  }
+}"
+`;
+
 exports[`should do nothing if the emoji is accessible already 1`] = `
 "
 function Correct() {
   return <span aria-label=\\"shouldn't change\\" role=\\"img\\">🐽</span>;
+}"
+`;
+
+exports[`should fix emojis that are in accessible spans but with other text 1`] = `
+"
+function NotQuiteButClose() {
+  return <span aria-label=\\"shouldn't change\\" role=\\"img\\">asd <span aria-label=\\"pig nose\\" role=\\"img\\">🐽</span> asdf</span>;
 }"
 `;
 

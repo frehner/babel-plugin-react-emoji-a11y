@@ -67,11 +67,20 @@ module.exports = function testPlugin({ types: t }) {
             console.warn(
               `You wrapped your emoji in a span, but didn't give it a role="img".`
             );
+            openingParentElement.attributes.push(
+              t.jSXAttribute(t.jSXIdentifier("role"), t.stringLiteral("img"))
+            );
           }
 
           if (!hasCorrectAriaLabel) {
             console.warn(
               `You wrapped your emoji in a span, but didn't give it an aria-label="{label}".`
+            );
+            openingParentElement.attributes.push(
+              t.jSXAttribute(
+                t.jSXIdentifier("aria-label"),
+                t.stringLiteral(emojiData.description)
+              )
             );
           }
         }
