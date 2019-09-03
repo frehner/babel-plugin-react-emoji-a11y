@@ -1,5 +1,5 @@
 {
-  "name": "babel-react-emoji-a11y-plugin",
+  "name": "babel-plugin-react-emoji-a11y",
   "version": "0.0.1",
   "description": "A babel plugin that will take any emojis not wrapped in <span> and wrap them, with correct a11y attributes",
   "main": "index.js",
