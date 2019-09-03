@@ -80,3 +80,51 @@ it(`should do nothing if the emoji is accessible already`, () => {
   expect(code).toMatchSnapshot();
   expect(console.warn).toBeCalledTimes(0);
 });
+
+it(`should be able to handle multiple emojis separated by text`, () => {
+  const original = `
+    function Bad() {
+      return (
+        <div>
+          test 🐽 blah 💩
+        </div>
+      )
+    }
+  `;
+
+  const { code } = babel.transform(original, { plugins: [plugin] });
+  expect(code).toMatchSnapshot();
+  expect(console.warn).toBeCalledTimes(2);
+});
+
+it(`should be able to handle multiple emojis next to each other`, () => {
+  const original = `
+    function Bad() {
+      return (
+        <div>
+          🐽💩
+        </div>
+      )
+    }
+  `;
+
+  const { code } = babel.transform(original, { plugins: [plugin] });
+  expect(code).toMatchSnapshot();
+  expect(console.warn).toBeCalledTimes(2);
+});
+
+it(`should be able to handle multiple emojis, with one being good and another needing fixing`, () => {
+  const original = `
+    function Bad() {
+      return (
+        <div>
+          <span role="img" aria-label="pig nose">🐽</span>💩
+        </div>
+      )
+    }
+  `;
+
+  const { code } = babel.transform(original, { plugins: [plugin] });
+  expect(code).toMatchSnapshot();
+  expect(console.warn).toBeCalledTimes(1);
+});

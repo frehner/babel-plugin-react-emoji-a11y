@@ -84,7 +84,6 @@ module.exports = function testPlugin({ types: t }) {
             );
           }
         }
-        // console.log("openingParentElement", path.parent.openingElement)
       }
     }
   };

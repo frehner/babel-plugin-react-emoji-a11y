@@ -18,6 +18,33 @@ class AlmostThere extends React.component {
 }"
 `;
 
+exports[`should be able to handle multiple emojis next to each other 1`] = `
+"
+function Bad() {
+  return <div>
+          <span aria-label=\\"pig nose\\" role=\\"img\\">🐽</span><span aria-label=\\"pile of poo\\" role=\\"img\\">💩</span>
+        </div>;
+}"
+`;
+
+exports[`should be able to handle multiple emojis separated by text 1`] = `
+"
+function Bad() {
+  return <div>
+          test <span aria-label=\\"pig nose\\" role=\\"img\\">🐽</span> blah <span aria-label=\\"pile of poo\\" role=\\"img\\">💩</span>
+        </div>;
+}"
+`;
+
+exports[`should be able to handle multiple emojis, with one being good and another needing fixing 1`] = `
+"
+function Bad() {
+  return <div>
+          <span role=\\"img\\" aria-label=\\"pig nose\\">🐽</span><span aria-label=\\"pile of poo\\" role=\\"img\\">💩</span>
+        </div>;
+}"
+`;
+
 exports[`should do nothing if the emoji is accessible already 1`] = `
 "
 function Correct() {
